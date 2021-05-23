@@ -63,6 +63,8 @@ const App = () => {
     } else {
       setCurrentSong(musics[indexCurrentSong + 1])
     }
+
+    setIsPlay(true)
   }
 
   const calculateTime = (time) => {
@@ -101,6 +103,7 @@ const App = () => {
 
       <ControlPanel
         currentSong={currentSong}
+        isPlay={isPlay}
         currentArtist={currentArtist}
         togglePlaying={togglePlaying}
         nextSong={nextSong}

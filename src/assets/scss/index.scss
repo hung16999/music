@@ -1,0 +1,51 @@
+body {
+  // background: #181a1f;
+}
+
+$heightApp: 100vh;
+$widthApp: $heightApp / 2;
+.music-app {
+  width: $widthApp;
+  height: $heightApp;
+  // background: red;
+}
+
+.header {
+  width: $widthApp;
+  height: $heightApp * 26 / 100;
+  background: #1f2128;
+  position: relative;
+
+  .text {
+    color: white;
+    font-size: 26px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  img {
+    width: $widthApp;
+    height: $heightApp * 26 / 100;
+    object-fit: cover;
+  }
+}
+
+.bodyApp {
+  width: $widthApp;
+  $heightBodyApp: $heightApp * 60 / 100;
+  height: $heightBodyApp;
+  background: yellow;
+
+  &__topSong {
+    height: $heightBodyApp * 60 /100;
+    background: orange;
+  }
+}
+
+.controlPanel {
+  width: $widthApp;
+  height: $heightApp * 14 / 100;
+  background: green;
+}

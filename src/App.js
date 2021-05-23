@@ -5,23 +5,16 @@ import React, { useEffect, useRef, useState } from "react"
 import BodyApp from "./components/BodyApp"
 import ControlPanel from "./components/ControlPanel"
 import Header from "./components/Header"
-import Slider from "./components/Slider"
 import { albums } from "./constants/albums"
 import { artists } from "./constants/artists"
 import { musics } from "./constants/musics"
 
 const App = () => {
-  const emptySong = {
-    id: null,
-    title: "Not playing",
-    artistID: "",
-    albumID: "",
-  }
   const [isPlay, setIsPlay] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const [percentage, setPercentage] = useState(0)
-  const [currentSong, setCurrentSong] = useState(emptySong)
+  const [currentSong, setCurrentSong] = useState(musics[0])
   const [currentArtist, setCurrentArtist] = useState({})
   const [currentAlbum, setCurrentAlbum] = useState({})
 
@@ -38,17 +31,13 @@ const App = () => {
   })
 
   useEffect(() => {
-    if (currentSong.id !== null) {
-      const findedArtist = artists.find(
-        (artist) => artist.id === currentSong.artistID
-      )
-      const findedAlbum = albums.find(
-        (album) => album.id === currentSong.albumID
-      )
+    const findedArtist = artists.find(
+      (artist) => artist.id === currentSong.artistID
+    )
+    const findedAlbum = albums.find((album) => album.id === currentSong.albumID)
 
-      setCurrentArtist(findedArtist)
-      setCurrentAlbum(findedAlbum)
-    }
+    setCurrentArtist(findedArtist)
+    setCurrentAlbum(findedAlbum)
   }, [currentSong])
 
   const changeSlider = (e) => {
@@ -97,14 +86,8 @@ const App = () => {
 
   return (
     <div className="music-app">
-      {musics.map((song) => (
-        <p key={song.id} onClick={() => handleClickSong(song)}>
-          {song.name}
-        </p>
-      ))}
-
       <Header currentArtist={currentArtist} currentAlbum={currentAlbum} />
-      <BodyApp />
+      <BodyApp handleClickSong={handleClickSong} />
 
       <audio
         ref={audioRef}
@@ -121,9 +104,6 @@ const App = () => {
         currentArtist={currentArtist}
         togglePlaying={togglePlaying}
         nextSong={nextSong}
-      />
-
-      <Slider
         duration={duration}
         currentTime={currentTime}
         percentage={percentage}

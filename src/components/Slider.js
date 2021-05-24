@@ -3,6 +3,9 @@ import { useEffect, useRef, useState } from "react"
 const Slider = ({ percentage = 0, changeSlider, duration, currentTime }) => {
   const [position, setPosition] = useState(0)
 
+  const thumbRef = useRef()
+  const rangeRef = useRef()
+
   useEffect(() => {
     setPosition(percentage)
   }, [percentage])
@@ -26,7 +29,7 @@ const Slider = ({ percentage = 0, changeSlider, duration, currentTime }) => {
 
         <div className="sliderBar__progress">
           <div style={full}>
-            <div style={filler}></div>
+            <div ref={thumbRef} style={filler}></div>
           </div>
         </div>
 
@@ -36,6 +39,9 @@ const Slider = ({ percentage = 0, changeSlider, duration, currentTime }) => {
       <input
         type="range"
         value={position}
+        ref={rangeRef}
+        min={0}
+        max={100}
         step="0.01"
         className="range"
         onChange={changeSlider}

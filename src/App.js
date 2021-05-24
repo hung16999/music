@@ -2,8 +2,9 @@ import "./assets/scss/index.scss"
 
 import React, { useEffect, useRef, useState } from "react"
 
-import BodyApp from "./components/BodyApp"
+import ControlPanel from "./components/ControlPanel"
 import Header from "./components/Header"
+import ListMusic from "./components/ListMusic"
 import { albums } from "./constants/albums"
 import { artists } from "./constants/artists"
 import { musics } from "./constants/musics"
@@ -41,7 +42,7 @@ const App = () => {
 
   const changeSlider = (e) => {
     const audio = audioRef.current
-    audio.currentTime = (audio.duration / 100) * e.target.value
+    audio.currentTime = Math.floor((audio.duration / 100) * e.target.value)
     setPercentage(e.target.value)
   }
 
@@ -87,19 +88,24 @@ const App = () => {
 
   return (
     <div className="music-app">
-      <Header currentArtist={currentArtist} currentAlbum={currentAlbum} />
+      <Header
+        isPlay={isPlay}
+        currentArtist={currentArtist}
+        currentAlbum={currentAlbum}
+      />
 
-      <BodyApp
-        handleClickSong={handleClickSong}
+      <ListMusic handleClickSong={handleClickSong} />
+
+      <ControlPanel
         currentSong={currentSong}
         isPlay={isPlay}
         currentArtist={currentArtist}
-        togglePlaying={togglePlaying}
-        nextSong={nextSong}
         duration={duration}
         currentTime={currentTime}
         percentage={percentage}
         changeSlider={changeSlider}
+        togglePlaying={togglePlaying}
+        nextSong={nextSong}
       />
 
       <audio

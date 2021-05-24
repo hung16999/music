@@ -6,17 +6,19 @@ import nextButton from "../assets/icons/play-next-button.svg"
 import pauseButton from "../assets/icons/pause-button.svg"
 import playButton from "../assets/icons/play-button-arrowhead.svg"
 
-const ControlPanel = ({
-  currentSong,
-  isPlay,
-  currentArtist,
-  togglePlaying,
-  nextSong,
-  duration,
-  currentTime,
-  percentage,
-  changeSlider,
-}) => {
+const ControlPanel = (props) => {
+  const {
+    currentSong,
+    isPlay,
+    currentArtist,
+    togglePlaying,
+    nextSong,
+    duration,
+    currentTime,
+    percentage,
+    changeSlider,
+  } = props
+
   const [isShowPopup, setIsShowPopup] = useState(false)
 
   return (
@@ -68,9 +70,12 @@ const ControlPanel = ({
 
       <div className="controlPanel__lyric">
         {currentSong.lyric ? (
-          <div>{currentSong.lyric}</div>
+          <>
+            <h2>Lyrics:</h2>
+            <div>{currentSong.lyric}</div>
+          </>
         ) : (
-          <div>Hiện không có lời bài hát</div>
+          <div>No lyrics</div>
         )}
       </div>
     </div>

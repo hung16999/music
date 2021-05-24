@@ -21,18 +21,18 @@ export const albums = [
     id: 4,
     name: "The Slow Rush",
     artist: "Tama Ihata",
-    srcImg: "/imgs/album-1.jpeg",
+    srcImg: "/imgs/current-layer-song.jpeg",
   },
   {
     id: 5,
     name: "Currents",
     artist: "Tama Ihata",
-    srcImg: "/imgs/album-2.jpeg",
+    srcImg: "/imgs/cover.jpeg",
   },
   {
     id: 6,
     name: "Lonerism",
     artist: "Tama Ihata",
-    srcImg: "/imgs/album-3.jpeg",
+    srcImg: "/imgs/artist.jpeg",
   },
 ]

@@ -168,7 +168,7 @@ export const musics = [
     artistID: 3,
     count: 0,
     srcImg: "/imgs/song-3.jpeg",
-    albumID: 2,
+    albumID: 1,
   },
   {
     id: 4,
@@ -178,7 +178,7 @@ export const musics = [
     artistID: 2,
     count: 0,
     srcImg: "/imgs/song-1.jpeg",
-    albumID: 2,
+    albumID: 4,
   },
   {
     id: 5,
@@ -280,7 +280,7 @@ export const musics = [
     artistID: 3,
     count: 0,
     srcImg: "/imgs/song-3.jpeg",
-    albumID: 3,
+    albumID: 5,
   },
   {
     id: 7,
@@ -311,7 +311,7 @@ export const musics = [
     artistID: 2,
     count: 0,
     srcImg: "/imgs/song-1.jpeg",
-    albumID: 2,
+    albumID: 3,
   },
   {
     id: 8,
@@ -343,6 +343,6 @@ export const musics = [
     artistID: 1,
     count: 0,
     srcImg: "/imgs/song-2.jpeg",
-    albumID: 2,
+    albumID: 6,
   },
 ]

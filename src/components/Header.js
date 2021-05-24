@@ -6,6 +6,9 @@ const Header = ({ currentSong, currentArtist, currentAlbum }) => {
       <div className="header">
         <img src={currentArtist.srcImg} alt="" />
         <span className="header__text">{currentArtist.name}</span>
+        <div className="header__albumPicture">
+          <img src={currentAlbum.srcImg} alt="" />
+        </div>
       </div>
     </>
   )

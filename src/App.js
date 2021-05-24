@@ -3,7 +3,6 @@ import "./assets/scss/index.scss"
 import React, { useEffect, useRef, useState } from "react"
 
 import BodyApp from "./components/BodyApp"
-import ControlPanel from "./components/ControlPanel"
 import Header from "./components/Header"
 import { albums } from "./constants/albums"
 import { artists } from "./constants/artists"
@@ -11,7 +10,7 @@ import { musics } from "./constants/musics"
 
 const App = () => {
   const [isPlay, setIsPlay] = useState(false)
-  const [currentTime, setCurrentTime] = useState(0)
+  const [currentTime, setCurrentTime] = useState("0:00")
   const [duration, setDuration] = useState(0)
   const [percentage, setPercentage] = useState(0)
   const [currentSong, setCurrentSong] = useState(musics[0])
@@ -82,26 +81,16 @@ const App = () => {
       100
     ).toFixed(2)
 
-    setPercentage(percent)
+    setPercentage(+percent)
     setCurrentTime(calculateTime(currentTime))
   }
 
   return (
     <div className="music-app">
       <Header currentArtist={currentArtist} currentAlbum={currentAlbum} />
-      <BodyApp handleClickSong={handleClickSong} />
 
-      <audio
-        ref={audioRef}
-        src={currentSong.srcAudio}
-        onEnded={nextSong}
-        onTimeUpdate={getCurrentTime}
-        onLoadedData={(e) => {
-          setDuration(calculateTime(e.currentTarget.duration))
-        }}
-      />
-
-      <ControlPanel
+      <BodyApp
+        handleClickSong={handleClickSong}
         currentSong={currentSong}
         isPlay={isPlay}
         currentArtist={currentArtist}
@@ -111,6 +100,16 @@ const App = () => {
         currentTime={currentTime}
         percentage={percentage}
         changeSlider={changeSlider}
+      />
+
+      <audio
+        ref={audioRef}
+        src={currentSong.srcAudio}
+        onEnded={nextSong}
+        onTimeUpdate={getCurrentTime}
+        onLoadedData={(e) => {
+          setDuration(calculateTime(e.currentTarget.duration))
+        }}
       />
     </div>
   )

@@ -12,8 +12,10 @@ $widthApp: $heightApp / 2;
 .music-app {
   width: $widthApp;
   height: $heightApp;
-  border-radius: 35px;
+  border-radius: 27px;
   overflow: hidden;
+  margin: auto;
+  position: relative;
 }
 
 .header {
@@ -36,16 +38,40 @@ $widthApp: $heightApp / 2;
     height: 100%;
     object-fit: cover;
   }
+
+  &__albumPicture {
+    $widthAlbumPicture: $heightApp * 13 /100;
+    width: $widthAlbumPicture;
+    height: $widthAlbumPicture;
+    border-radius: 50%;
+    background: #1f2128;
+    margin: auto;
+    position: absolute;
+    bottom: -$widthAlbumPicture / 2;
+    left: 50%;
+    margin-left: -$widthAlbumPicture / 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+
+    img {
+      width: $widthAlbumPicture * 75 /100;
+      height: $widthAlbumPicture * 75 / 100;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
 }
 
 .bodyApp {
   width: $widthApp;
-  $heightBodyApp: $heightApp * 60 / 100;
+  $heightBodyApp: $heightApp * 74 / 100;
   height: $heightBodyApp;
   background: #1f2128;
 
   &__topSong {
-    $heightTopSong: $heightBodyApp * 60 /100;
+    $heightTopSong: $heightBodyApp * 48 /100;
     height: $heightTopSong;
 
     div:last-child {
@@ -80,6 +106,7 @@ $widthApp: $heightApp / 2;
         align-items: center;
         padding: 7px 0;
         border-bottom: 1px solid #2f2f3c;
+        cursor: pointer;
 
         div {
           display: flex;
@@ -113,7 +140,7 @@ $widthApp: $heightApp / 2;
   }
 
   &__album {
-    $heightAlbum: $heightBodyApp * 40 /100;
+    $heightAlbum: $heightBodyApp * 32 /100;
     height: $heightAlbum;
 
     &__title {
@@ -138,10 +165,9 @@ $widthApp: $heightApp / 2;
       display: flex;
       flex-wrap: wrap;
       flex-direction: column;
-      // justify-content: space-evenly;
       width: $widthApp;
       height: $heightAlbum * 75 / 100;
-      overflow-x: auto;
+      overflow: auto;
 
       &__item {
         display: flex;
@@ -154,6 +180,7 @@ $widthApp: $heightApp / 2;
           width: 65px;
           height: 65px;
           border-radius: 50%;
+          cursor: pointer;
         }
 
         div {
@@ -161,6 +188,7 @@ $widthApp: $heightApp / 2;
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          cursor: pointer;
 
           span:first-child {
             color: #d2d3d4;
@@ -178,12 +206,135 @@ $widthApp: $heightApp / 2;
 }
 
 .controlPanel {
+  border-radius: 27px;
+  overflow: hidden;
+  z-index: 1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: $widthApp;
   height: $heightApp * 14 / 100;
+  transition: 0.75s;
   background: #333542;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 
-  img {
-    width: 15px;
-    height: 15px;
+  &__arrow {
+    width: 13px;
+    height: 13px;
+    margin-top: 5px;
+    transition: 0.75s;
+    cursor: pointer;
+
+    &.down {
+      transform: rotateX(150deg);
+      transition: 0.75s;
+    }
   }
+
+  &__detail {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+
+    &__avatar {
+      z-index: 9999;
+      width: 33px;
+      height: 33px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    &__text {
+      display: flex;
+      flex-direction: column;
+      width: 60%;
+
+      span:first-child {
+        color: white;
+        font-size: 13px;
+      }
+
+      span:last-child {
+        color: #a1a2a8;
+        font-size: 11px;
+      }
+    }
+
+    &__button {
+      position: relative;
+      z-index: 1000;
+      display: flex;
+      flex-direction: row;
+
+      &__icon {
+        width: 13px;
+        height: 13px;
+        cursor: pointer;
+      }
+
+      img:first-child {
+        margin-right: 20px;
+      }
+    }
+  }
+
+  &.active {
+    height: $heightApp * 75 / 100;
+    transition: 0.75s;
+  }
+
+  &__lyric {
+    padding: 0 15px 15px 15px;
+    margin-top: 10px;
+    color: #a1a2a8;
+    overflow: scroll;
+  }
+}
+
+.sliderBar {
+  width: 90%;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  &__progress {
+    width: 80%;
+  }
+
+  span {
+    font-size: 12px;
+
+    &:first-child {
+      color: #485062;
+    }
+
+    &:last-child {
+      color: white;
+    }
+  }
+
+  &__full {
+    height: 2px;
+    width: 100%;
+    background-color: #1f2128;
+  }
+}
+
+.range {
+  -webkit-appearance: none;
+  background-color: rgba(240, 9, 9, 0.397);
+  height: 10px;
+  width: 100%;
+  cursor: pointer;
+  opacity: 0;
+  margin: 0 auto;
 }

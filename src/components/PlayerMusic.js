@@ -23,14 +23,14 @@ const PlayerMusic = (props) => {
 
         <div className="controlPanel__playerMusic__button">
           <img
-            className="controlPanel__playerMusic__button__icon"
+            className={isPlay && "poiter"}
             src={isPlay ? pauseButton : playButton}
             onClick={togglePlaying}
             alt=""
           />
 
           <img
-            className="controlPanel__playerMusic__button__icon"
+            className={isPlay && "poiter"}
             src={nextButton}
             alt=""
             onClick={nextSong}

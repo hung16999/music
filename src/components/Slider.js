@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 
-const Slider = ({ percentage, changeSlider, duration, currentTime }) => {
+const Slider = (props) => {
+  const { percentage, changeSlider, duration, currentTime, isPlay } = props
+
   const [position, setPosition] = useState(0)
 
   const thumbRef = useRef()
@@ -37,11 +39,14 @@ const Slider = ({ percentage, changeSlider, duration, currentTime }) => {
       </div>
 
       <input
+        className={isPlay ? "range poiter" : "range"}
+        disabled={!isPlay}
         type="range"
         value={position}
+        min={0}
+        max={100}
         ref={rangeRef}
         step="0.01"
-        className="range"
         onChange={changeSlider}
       />
     </>

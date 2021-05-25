@@ -55,8 +55,10 @@ const App = () => {
 
   const changeSlider = (e) => {
     const audio = audioRef.current
+
     audio.currentTime = Math.floor((audio.duration / 100) * e.target.value)
     setPercentage(e.target.value)
+    setIsPlay(true)
   }
 
   const handleClickSong = (songID) => {

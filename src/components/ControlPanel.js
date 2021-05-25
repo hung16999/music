@@ -40,6 +40,7 @@ const ControlPanel = (props) => {
       />
 
       <Slider
+        isPlay={isPlay}
         duration={duration}
         currentTime={currentTime}
         percentage={percentage}

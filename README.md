@@ -6,20 +6,26 @@ git clone https://github.com/hung16999/music.git
 
 cd music
 
-# 3. npm install
+# 3. cài đặt các module
 
-# 4. Đi vào thư mục server
+Hãy đảm bảo máy tính của bạn đã cài nodejs version 14.x trở lên
+
+npm install
+
+# 4. cài đặt gói json-server
+
+npm i -g json-server
+
+# 5. Đi vào thư mục server
 
 cd src/server
 
-# 5. Khởi động server chạy trên port 3333
+# 6. Khởi động server chạy trên port 3333
 
 json-server --watch db.json --port 3333
 
-# 6. Quay lại thư mục music
+# 7. Quay lại thư mục music
 
 cd ../..
 
-# 7. Chạy ứng dụng
-
-npm start
+# 8. npm start

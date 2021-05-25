@@ -5,18 +5,17 @@ import React, { useEffect, useRef, useState } from "react"
 import ControlPanel from "./components/ControlPanel"
 import Header from "./components/Header"
 import ListMusic from "./components/ListMusic"
-import { albums } from "./constants/albums"
-import { artists } from "./constants/artists"
-import { musics } from "./constants/musics"
+import axios from "axios"
 
 const App = () => {
   const [isPlay, setIsPlay] = useState(false)
   const [currentTime, setCurrentTime] = useState("0:00")
-  const [duration, setDuration] = useState(0)
+  const [duration, setDuration] = useState("0:00")
   const [percentage, setPercentage] = useState(0)
-  const [currentSong, setCurrentSong] = useState(musics[0])
+  const [currentSong, setCurrentSong] = useState({})
   const [currentArtist, setCurrentArtist] = useState({})
   const [currentAlbum, setCurrentAlbum] = useState({})
+  const [lengthOfList, setLengthOfList] = useState(0)
 
   const audioRef = useRef()
 
@@ -31,13 +30,19 @@ const App = () => {
   })
 
   useEffect(() => {
-    const findedArtist = artists.find(
-      (artist) => artist.id === currentSong.artistID
-    )
-    const findedAlbum = albums.find((album) => album.id === currentSong.albumID)
+    if (currentSong.id) {
+      axios
+        .get(`http://localhost:3333/artists/${currentSong.artistID}`)
+        .then((response) => {
+          setCurrentArtist(response.data)
+        })
 
-    setCurrentArtist(findedArtist)
-    setCurrentAlbum(findedAlbum)
+      axios
+        .get(`http://localhost:3333/albums/${currentSong.albumID}`)
+        .then((response) => {
+          setCurrentAlbum(response.data)
+        })
+    }
   }, [currentSong])
 
   const changeSlider = (e) => {
@@ -46,9 +51,13 @@ const App = () => {
     setPercentage(e.target.value)
   }
 
-  const handleClickSong = async (song) => {
-    await setCurrentSong(song)
-    setIsPlay(true)
+  const handleClickSong = (songID) => {
+    axios
+      .get(`http://localhost:3333/musics/${songID}`)
+      .then(async (response) => {
+        await setCurrentSong(response.data)
+        setIsPlay(true)
+      })
   }
 
   const togglePlaying = () => {
@@ -56,15 +65,19 @@ const App = () => {
   }
 
   const nextSong = () => {
-    const indexCurrentSong = musics.indexOf(currentSong)
-
-    if (indexCurrentSong === musics.length - 1) {
-      setCurrentSong(musics[0])
+    if (currentSong.id === lengthOfList) {
+      axios.get(`http://localhost:3333/musics/1`).then(async (response) => {
+        await setCurrentSong(response.data)
+        setIsPlay(true)
+      })
     } else {
-      setCurrentSong(musics[indexCurrentSong + 1])
+      axios
+        .get(`http://localhost:3333/musics/${currentSong.id + 1}`)
+        .then(async (response) => {
+          await setCurrentSong(response.data)
+          setIsPlay(true)
+        })
     }
-
-    setIsPlay(true)
   }
 
   const calculateTime = (time) => {
@@ -94,7 +107,10 @@ const App = () => {
         currentAlbum={currentAlbum}
       />
 
-      <ListMusic handleClickSong={handleClickSong} />
+      <ListMusic
+        handleClickSong={handleClickSong}
+        setLengthOfList={setLengthOfList}
+      />
 
       <ControlPanel
         currentSong={currentSong}

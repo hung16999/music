@@ -5,7 +5,7 @@ const Header = ({ isPlay, currentArtist, currentAlbum }) => {
   return (
     <>
       <div className="header">
-        <img src={currentArtist.srcImg} alt="" />
+        {currentArtist.id && <img src={currentArtist.srcImg} alt="" />}
 
         <div className="header__search">
           <img src={iconSearch} alt="" />
@@ -18,7 +18,7 @@ const Header = ({ isPlay, currentArtist, currentAlbum }) => {
             isPlay ? "header__albumPicture rotate" : "header__albumPicture"
           }
         >
-          <img src={currentAlbum.srcImg} alt="" />
+          {currentAlbum.id && <img src={currentAlbum.srcImg} alt="" />}
         </div>
       </div>
     </>

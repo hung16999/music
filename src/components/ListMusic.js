@@ -1,12 +1,34 @@
-import React, { useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 
 import addIcon from "../assets/icons/add.svg"
-import { albums } from "../constants/albums"
 import { artists } from "../constants/artists"
-import { musics } from "../constants/musics"
+import axios from "axios"
 
-const ListMusic = ({ handleClickSong }) => {
+const ListMusic = ({ handleClickSong, setLengthOfList }) => {
   const albumsRef = useRef()
+  const [isLoadingMusic, setIsLoadingMusic] = useState(true)
+  const [isLoadingAlbum, setIsLoadingAlbum] = useState(true)
+  const [listMusic, setListMusic] = useState([])
+  const [listAlbum, setListAlbum] = useState([])
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3333/musics")
+      .then((response) => {
+        setListMusic(response.data)
+        setIsLoadingMusic(false)
+        setLengthOfList(response.data.length)
+      })
+      .catch((error) => {
+        setIsLoadingMusic(false)
+        console.log(error)
+      })
+
+    axios.get("http://localhost:3333/albums").then((response) => {
+      setListAlbum(response.data)
+      setIsLoadingAlbum(false)
+    })
+  }, [])
 
   const getArtist = (id) => {
     const findedArtist = artists.find((artist) => artist.id === id)
@@ -30,11 +52,12 @@ const ListMusic = ({ handleClickSong }) => {
         </div>
 
         <div className="listMusic__topSong__list">
-          {musics.map((song) => (
+          {isLoadingMusic && <div className="loading">Loading ... </div>}
+          {listMusic.map((song) => (
             <div
               className="listMusic__topSong__list__item"
               key={song.id}
-              onClick={() => handleClickSong(song)}
+              onClick={() => handleClickSong(song.id)}
             >
               <img src={song.srcImg} alt="" />
 
@@ -60,7 +83,8 @@ const ListMusic = ({ handleClickSong }) => {
           onWheel={handleScrollHorizontal}
           className="listMusic__album__list"
         >
-          {albums.map((album) => (
+          {isLoadingAlbum && <div className="loading">Loading ...</div>}
+          {listAlbum.map((album) => (
             <div key={album.id} className="listMusic__album__list__item">
               <img src={album.srcImg} alt="" />
 

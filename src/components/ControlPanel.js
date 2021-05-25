@@ -33,11 +33,13 @@ const ControlPanel = (props) => {
       />
 
       <div className="controlPanel__detail">
-        <img
-          className="controlPanel__detail__avatar"
-          src={currentSong.srcImg}
-          alt=""
-        />
+        {currentSong.id && (
+          <img
+            className="controlPanel__detail__avatar"
+            src={currentSong.srcImg}
+            alt=""
+          />
+        )}
 
         <div className="controlPanel__detail__text">
           <span>{currentSong.name}</span>

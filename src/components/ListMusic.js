@@ -19,15 +19,19 @@ const ListMusic = ({ handleClickSong, setLengthOfList }) => {
         setIsLoadingMusic(false)
         setLengthOfList(response.data.length)
       })
-      .catch((error) => {
+      .catch(() => {
         setIsLoadingMusic(false)
-        console.log(error)
       })
 
-    axios.get("http://localhost:3333/albums").then((response) => {
-      setListAlbum(response.data)
-      setIsLoadingAlbum(false)
-    })
+    axios
+      .get("http://localhost:3333/albums")
+      .then((response) => {
+        setListAlbum(response.data)
+        setIsLoadingAlbum(false)
+      })
+      .catch(() => {
+        setIsLoadingAlbum(false)
+      })
   }, [])
 
   const getArtist = (id) => {

@@ -70,16 +70,18 @@ const ControlPanel = (props) => {
         changeSlider={changeSlider}
       />
 
-      <div className="controlPanel__lyric">
-        {currentSong.lyric ? (
-          <>
-            <h2>Lyrics:</h2>
-            <div>{currentSong.lyric}</div>
-          </>
-        ) : (
-          <div>No lyrics</div>
-        )}
-      </div>
+      {currentSong.id && (
+        <div className="controlPanel__lyric">
+          {currentSong.lyric ? (
+            <>
+              <h2>Lyrics:</h2>
+              <div>{currentSong.lyric}</div>
+            </>
+          ) : (
+            <div>No lyrics</div>
+          )}
+        </div>
+      )}
     </div>
   )
 }

@@ -61,7 +61,11 @@ const App = () => {
   }
 
   const togglePlaying = () => {
-    setIsPlay(!isPlay)
+    if (currentSong.id) {
+      setIsPlay(!isPlay)
+    } else {
+      setIsPlay(false)
+    }
   }
 
   const nextSong = () => {

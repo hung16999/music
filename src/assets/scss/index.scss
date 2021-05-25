@@ -95,14 +95,14 @@ $widthApp: $heightApp / 2;
   }
 }
 
-.listMusic {
+.playlist {
   width: $widthApp;
-  $heightlistMusic: $heightApp * 74 / 100;
-  height: $heightlistMusic;
+  $heightPlaylist: $heightApp * 74 / 100;
+  height: $heightPlaylist;
   background: #1f2128;
 
   &__topSong {
-    $heightTopSong: $heightlistMusic * 48 /100;
+    $heightTopSong: $heightPlaylist * 48 /100;
     height: $heightTopSong;
 
     div:last-child {
@@ -164,7 +164,7 @@ $widthApp: $heightApp / 2;
           border-radius: 10px;
         }
 
-        img:last-child {
+        img:not(:first-child) {
           width: 20px;
           height: 20px;
         }
@@ -173,7 +173,7 @@ $widthApp: $heightApp / 2;
   }
 
   &__album {
-    $heightAlbum: $heightlistMusic * 32 /100;
+    $heightAlbum: $heightPlaylist * 32 /100;
     height: $heightAlbum;
 
     &__title {
@@ -270,7 +270,7 @@ $widthApp: $heightApp / 2;
     }
   }
 
-  &__detail {
+  &__playerMusic {
     width: 90%;
     display: flex;
     flex-direction: row;

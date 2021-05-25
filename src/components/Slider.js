@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 
-const Slider = ({ percentage = 0, changeSlider, duration, currentTime }) => {
+const Slider = ({ percentage, changeSlider, duration, currentTime }) => {
   const [position, setPosition] = useState(0)
 
   const thumbRef = useRef()
@@ -40,8 +40,6 @@ const Slider = ({ percentage = 0, changeSlider, duration, currentTime }) => {
         type="range"
         value={position}
         ref={rangeRef}
-        min={0}
-        max={100}
         step="0.01"
         className="range"
         onChange={changeSlider}

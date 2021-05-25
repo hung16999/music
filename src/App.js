@@ -4,14 +4,16 @@ import React, { useEffect, useRef, useState } from "react"
 
 import ControlPanel from "./components/ControlPanel"
 import Header from "./components/Header"
-import ListMusic from "./components/ListMusic"
+import Playlist from "./components/Playlist"
 import axios from "axios"
 
 const App = () => {
   const [isPlay, setIsPlay] = useState(false)
-  const [currentTime, setCurrentTime] = useState("0:00")
-  const [duration, setDuration] = useState("0:00")
+
   const [percentage, setPercentage] = useState(0)
+  const [duration, setDuration] = useState("0:00")
+  const [currentTime, setCurrentTime] = useState("0:00")
+
   const [currentSong, setCurrentSong] = useState({})
   const [currentArtist, setCurrentArtist] = useState({})
   const [currentAlbum, setCurrentAlbum] = useState({})
@@ -28,6 +30,12 @@ const App = () => {
       audio.pause()
     }
   })
+
+  useEffect(() => {
+    axios.get("http://localhost:3333/musics").then((response) => {
+      setLengthOfList(response.data.length)
+    })
+  }, [])
 
   useEffect(() => {
     if (currentSong.id) {
@@ -111,10 +119,7 @@ const App = () => {
         currentAlbum={currentAlbum}
       />
 
-      <ListMusic
-        handleClickSong={handleClickSong}
-        setLengthOfList={setLengthOfList}
-      />
+      <Playlist handleClickSong={handleClickSong} />
 
       <ControlPanel
         currentSong={currentSong}

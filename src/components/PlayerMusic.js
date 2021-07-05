@@ -11,7 +11,7 @@ const PlayerMusic = (props) => {
         {currentSong.id && (
           <img
             className="controlPanel__playerMusic__avatar"
-            src={currentSong.srcImg}
+            src={currentSong.img}
             alt=""
           />
         )}

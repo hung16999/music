@@ -2,36 +2,11 @@ import React, { useEffect, useRef, useState } from "react"
 
 import Album from "./Album"
 import Music from "./Music"
-import axios from "axios"
 
-const Playlist = ({ handleClickSong }) => {
+const Playlist = ({ musics, handleClickSong }) => {
   const albumsRef = useRef()
   const [isLoadingMusic, setIsLoadingMusic] = useState(true)
   const [isLoadingAlbum, setIsLoadingAlbum] = useState(true)
-  const [listMusic, setListMusic] = useState([])
-  const [listAlbum, setListAlbum] = useState([])
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:3333/musics")
-      .then((response) => {
-        setListMusic(response.data)
-        setIsLoadingMusic(false)
-      })
-      .catch(() => {
-        setIsLoadingMusic(false)
-      })
-
-    axios
-      .get("http://localhost:3333/albums")
-      .then((response) => {
-        setListAlbum(response.data)
-        setIsLoadingAlbum(false)
-      })
-      .catch(() => {
-        setIsLoadingAlbum(false)
-      })
-  }, [])
 
   const handleScrollHorizontal = (e) => {
     if (e.deltaY > 0) {
@@ -52,7 +27,7 @@ const Playlist = ({ handleClickSong }) => {
         <div className="playlist__topSong__list">
           {isLoadingMusic && <div className="loading">Loading ... </div>}
 
-          {listMusic.map((song) => (
+          {musics.map((song) => (
             <Music
               song={song}
               handleClickSong={handleClickSong}
@@ -68,7 +43,7 @@ const Playlist = ({ handleClickSong }) => {
           <span>all albums</span>
         </div>
 
-        <div
+        {/* <div
           ref={albumsRef}
           onWheel={handleScrollHorizontal}
           className="playlist__album__list"
@@ -77,7 +52,7 @@ const Playlist = ({ handleClickSong }) => {
           {listAlbum.map((album) => (
             <Album album={album} key={album.id} />
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   )
